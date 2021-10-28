@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { AccountsService } from '../accounts.service';
 import { LoggingService } from "../logging.service";
 
 @Component({
@@ -6,22 +7,33 @@ import { LoggingService } from "../logging.service";
   templateUrl: './new-account.component.html',
   styleUrls: ['./new-account.component.css'],
   // 2.after adding this: angular would know how to give us an instance
-  providers: [LoggingService]
+  // 1.4 add in to provider:
+  providers: [LoggingService, AccountsService]
 })
 export class NewAccountComponent {
-  @Output() accountAdded = new EventEmitter<{name: string, status: string}>();
+  // 1.2:
+  // @Output() accountAdded = new EventEmitter<{name: string, status: string}>();
 
   //1. inform angular we will need instance of LoggingService class(loggingService property with type of LoggingService class)
-  constructor(private loggingService: LoggingService) {}
+  // 1.3 instead need to inject our accountService
+  constructor(
+    private loggingServiceProp: LoggingService,
+    private accountServiceProp: AccountsService) {
+
+  }
 
   onCreateAccount(accountName: string, accountStatus: string) {
-    this.accountAdded.emit({
-      name: accountName,
-      status: accountStatus
-    });
+    // 1.1. don't need to emit anymore
+    // this.accountAdded.emit({
+    //   name: accountName,
+    //   status: accountStatus
+    // });
+
+    // 1.5:
+    this.accountServiceProp.addAccount(accountName, accountStatus)
 
     // 3.now access service:
-    this.loggingService.logStatusChanged(accountStatus);
+    this.loggingServiceProp.logStatusChanged(accountStatus);
 
     // console.log('A server status changed, new status: ' + accountStatus); UPDATE with services
     // const service = new LoggingService();
