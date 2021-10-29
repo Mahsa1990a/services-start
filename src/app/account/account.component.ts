@@ -8,7 +8,8 @@ import { LoggingService } from "../logging.service";
   styleUrls: ['./account.component.css'],
   // 2.after adding this: angular would know how to give us an instance
    // 1.4 add in to provider
-  providers: [LoggingService, AccountsService]
+  // providers: [LoggingService, AccountsService] // pnly remove AccountsService here=> we want to get it form paretn App
+  providers: [LoggingService]
 })
 export class AccountComponent {
   @Input() account: {name: string, status: string};
