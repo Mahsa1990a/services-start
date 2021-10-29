@@ -9,7 +9,7 @@ import { LoggingService } from "../logging.service";
   // 2.after adding this: angular would know how to give us an instance
   // 1.4 add in to provider:
   // providers: [LoggingService, AccountsService] // only remove AccountsService here => we want to get it form paretn App
-  providers: [LoggingService]
+  // providers: [LoggingService]   AFter we inject all services in app.module.ts
 })
 export class NewAccountComponent {
   // 1.2:
@@ -34,7 +34,7 @@ export class NewAccountComponent {
     this.accountServiceProp.addAccount(accountName, accountStatus)
 
     // 3.now access service:
-    this.loggingServiceProp.logStatusChanged(accountStatus);
+    // this.loggingServiceProp.logStatusChanged(accountStatus);
 
     // console.log('A server status changed, new status: ' + accountStatus); UPDATE with services
     // const service = new LoggingService();
