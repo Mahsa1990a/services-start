@@ -20,7 +20,10 @@ export class NewAccountComponent {
   constructor(
     private loggingServiceProp: LoggingService,
     private accountServiceProp: AccountsService) {
-
+      // coming from account component and account services
+      this.accountServiceProp.statusUpdatedEvent.subscribe(
+        (status: string) => alert("New Statussss: " + status)
+      );
   }
 
   onCreateAccount(accountName: string, accountStatus: string) {

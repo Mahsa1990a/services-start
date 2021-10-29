@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 import { LoggingService } from "./logging.service";
 
 // we should attach meta data when we're using service into anothe service
@@ -22,6 +22,9 @@ export class AccountsService {
       status: 'unknown'
     }
   ];
+
+  //we want to provide some events, that we can trigger in one component and listen to event in another component
+  statusUpdatedEvent = new EventEmitter<string>(); // then we'll emit in in account component
 
   // This is the place the status change
   // 1. So we can call logStatusChanged from LoggingService here:

@@ -33,6 +33,8 @@ export class AccountComponent {
     // this.loggingService.logStatusChanged(status);
 
    // 1.5:
-   this.accountServiceProp.updateStatus(this.id, status)
+    this.accountServiceProp.updateStatus(this.id, status);
+    //  it's from new evet in accounts service:
+    this.accountServiceProp.statusUpdatedEvent.emit(status); // and in new account component we want to listen to it
   }
 }
